@@ -1,0 +1,11 @@
+logs
+target
+test-output
+.settings
+.classpath
+.project
+.idea
+.bak
+*.iml
+pom.xml.versionsBackup
+bin

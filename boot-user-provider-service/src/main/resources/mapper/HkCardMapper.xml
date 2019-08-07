@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fmbah.fmall.bootuserproviderservice.mapper.HkCardMapper">
+
+
+    <insert id="insertHkCard" parameterType="com.fmbah.fmall.bean.HkCrad">
+        insert into `hk_card` (`name`, `card_num`, `type`)
+        values
+        (#{hkCrad.name}, #{hkCrad.cardNum}, #{hkCrad.type})
+    </insert>
+
+
+
+</mapper>
