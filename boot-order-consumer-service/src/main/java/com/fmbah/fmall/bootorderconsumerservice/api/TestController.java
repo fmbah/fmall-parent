@@ -24,71 +24,76 @@ public class TestController {
 
     @Autowired
     OrderService orderService;
-    @Reference(version = "1.0.0")
+    @Reference(version = "1.0.0", stub = "com.fmbah.fmall.service.impl.HkCardServiceStub")
     HkCardService hkCardService;
 
 
     @RequestMapping("initOrder")
     public Object initOrder(@RequestParam("userId") String userId) throws IOException {
 
+for (int t = 0; t< 1000; t++) {
+    new Thread(
+            ()->{
+                for (int i = 0; i< Integer.MAX_VALUE; i++) {
+
+//            OkHttpClient client = new OkHttpClient();
+//
+//            Request request = new Request.Builder()
+//                    .url("https://hk.51240.com/web_system/51240_com_www/system/file/hk/g/?&ajaxtimestamp=1564381680018")
+//                    .build();
+//
+//            try (Response response = client.newCall(request).execute()) {
+//                Document document = Jsoup.parse(response.body().string());
+//                Element tbody = document.getElementsByClass("kuang_biaoge").select("table").select("tbody").get(1);
+//                Elements trs = tbody.select("tr");
+//
+//
+//                int tr_js = 0;
+//                for (Element tr : trs) {
+//
+//                    if (tr_js++ == 0) {
+//                        continue;
+//                    }
+//
+//                    HkCrad hkCrad = new HkCrad();
+//                    Elements tds = tr.select("td");
+//                    int js = 0;
+//                    for (Element td : tds) {
+//                        if (js == 0) {
+//                            hkCrad.setName(td.html());
+//                        }
+//                        if (js == 1) {
+//                            hkCrad.setCardNum(td.html());
+//                        }
+//                        if (js == 2) {
+//                            hkCrad.setType(td.html());
+//                        }
+//                        js++;
+//                    }
+//                    hkCardService.insertHkCard(hkCrad);
+//                }
+//
+//            }
 
 
-        for (int i = 0; i< Integer.MAX_VALUE; i++) {
-
-            OkHttpClient client = new OkHttpClient();
-
-            Request request = new Request.Builder()
-                    .url("https://hk.51240.com/web_system/51240_com_www/system/file/hk/g/?&ajaxtimestamp=1564381680018")
-                    .build();
-
-            try (Response response = client.newCall(request).execute()) {
-                Document document = Jsoup.parse(response.body().string());
-                Element tbody = document.getElementsByClass("kuang_biaoge").select("table").select("tbody").get(1);
-                Elements trs = tbody.select("tr");
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
 
-                int tr_js = 0;
-                for (Element tr : trs) {
-
-                    if (tr_js++ == 0) {
-                        continue;
-                    }
 
                     HkCrad hkCrad = new HkCrad();
-                    Elements tds = tr.select("td");
-                    int js = 0;
-                    for (Element td : tds) {
-                        if (js == 0) {
-                            hkCrad.setName(td.html());
-                        }
-                        if (js == 1) {
-                            hkCrad.setCardNum(td.html());
-                        }
-                        if (js == 2) {
-                            hkCrad.setType(td.html());
-                        }
-                        js++;
-                    }
+                    hkCrad.setName("测试名称" + i);
+                    hkCrad.setCardNum(System.currentTimeMillis() + StringUtils.EMPTY);
+                    hkCrad.setType("身份证类型......" + i);
                     hkCardService.insertHkCard(hkCrad);
                 }
-
             }
+    ).start();
+}
 
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-
-
-            HkCrad hkCrad = new HkCrad();
-            hkCrad.setName("测试名称" + i);
-            hkCrad.setCardNum(System.currentTimeMillis() + StringUtils.EMPTY);
-            hkCrad.setType("身份证类型......" + i);
-            hkCardService.insertHkCard(hkCrad);
-        }
 
 
 
