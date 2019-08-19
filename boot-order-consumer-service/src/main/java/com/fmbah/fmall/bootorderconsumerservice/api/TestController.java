@@ -27,6 +27,10 @@ public class TestController {
     @Reference(version = "1.0.0", stub = "com.fmbah.fmall.service.impl.HkCardServiceStub")
     HkCardService hkCardService;
 
+    @RequestMapping("hello")
+    public Object hello() {
+        return "hello";
+    }
 
     @RequestMapping("initOrder")
     public Object initOrder(@RequestParam("userId") String userId) throws IOException {
